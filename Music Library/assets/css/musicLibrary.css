@@ -1,0 +1,13 @@
+#container {
+    border: 2px solid grey;
+    width: 360px;
+    margin: 0 auto;
+}
+
+h1{
+    text-align: center;
+}
+
+.playing{
+    color: green;
+}
