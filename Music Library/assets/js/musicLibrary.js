@@ -1,11 +1,19 @@
-// click to play/stop song
-$("ul").on("click", "li", function(){
-    $(this).toggleClass("playing");
+// plays a song in the library
+$("ul").on("click","#play", function(){
+    $("li").removeClass("playing");
+    $("#stop").replaceWith("<span id=\"play\"><i class=\"far fa-play-circle\"></i></span>");
+    $(this).replaceWith("<span id=\"stop\"><i class=\"far fa-stop-circle\"></i></span>");
 })
 
-// click to delete song
-$("ul").on("click", "span",function(event){
-    $(this).parent().fadeOut(1000, function(){
+// stops a song in the library 
+$("ul").on("click","#stop", function(){
+    $(this).replaceWith("<span id=\"play\"><i class=\"far fa-play-circle\"></i></span>");
+
+})
+
+// deletes song in the library
+$("ul").on("click", "#trash",function(event){
+    $(this).parent().fadeOut(250, function(){
         $(this).remove();
     });
     event.stopPropagation();
@@ -14,12 +22,15 @@ $("ul").on("click", "span",function(event){
 // add a song to the library
 $("input[type='text']").keypress(function(event){
     if(event.which === 13){
-        // grabs new song name from input
         var newSong = $(this).val();
-        // creates new song
-        $("ul").append("<li><span>X</span> "+newSong+"</li>");
-        // clear text input
+        var htmlStr = "<li><span id=\"trash\"><i class=\"far fa-trash-alt\"></i></span><span id=\"play\"><i class=\"far fa-play-circle\"></i></span> "+newSong+"</li>"
+        $("ul").append(htmlStr);
         $(this).val("");
     }
+})
+
+// hides/shows song input
+$(".fa-plus-square").click(function(){
+    $("input[type='text']").fadeToggle(250);
 })
 
